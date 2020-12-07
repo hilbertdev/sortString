@@ -52,17 +52,88 @@ namespace gameOfLife.Library
 
         public static int countNeighbors(int[,] grid, int col, int row)
         {
-            int total = 0;
-            for(int i = col -1; i < 2; i++)
+            //checking edge cases
+             //top left 
+             if(col == 0 && row == 0)
             {
-                for(int ix = row - 1; row < 2; i++)
-                {
-                    total += grid[i, ix];
-                }
+                int totalN = grid[col + 1, row] + grid[col, row + 1] + grid[col + 1, row + 1];
+                return totalN;
             }
-            total -= grid[col, row];
-            return total;
+            //bottom left 
+           else if(col == 0 && row == grid.GetLength(1) - 1)
+            {
+                int totalN = grid[col + 1, row] + grid[col, row - 1] + grid[col + 1, row - 1];
+                return totalN;
+            }
+            //top right 
+           else  if(col == grid.GetLength(0) - 1 && row == 0)
+            {
+                int totalN = grid[col - 1, row] + grid[col - 1, row + 1] + grid[col, row + 1];
+                return totalN;
+            }
+            //bottom right 
+           else if(col == grid.GetLength(0) - 1 && row == grid.GetLength(1) - 1)
+            {
+                int totalN = grid[col - 1, row] + grid[col - 1, row - 1] + grid[col, row - 1];
+                return totalN;
+            }
+            //end of check
+            else
+            {
+                if (col - 1 < 0)
+                {
+                    int totalN = 0;
+                    for (int i = col; i < 2; i++)
+                    {
+                        for (int ix = row - 1; ix < 3; ix++)
+                        {
+                            totalN += grid[i, ix];
+                        }
+                    }
+                    totalN -= grid[col, row];
+                    return totalN;
+                }
+                else if (row - 1 < 0)
+                {
+                    int totalN = 0;
+                    for (int i = col; i < 3; i++)
+                    {
+                        for (int ix = row; ix < 2; ix++)
+                        {
+                            totalN += grid[i, ix];
+                        }
+                    }
+                    totalN -= grid[col, row];
+                    return totalN;
+                }
+                else
+                {
+                    int total = 0;
+                    for (int i = col - 1; i < 3; i++)
+                    {
+                        for (int ix = row - 1; ix < 3; ix++)
+                        {
+                            total += grid[i, ix];
+                        }
+                    }
+                    total -= grid[col, row];
+                    return total;
+                }
+             
+            }
+
         }
-        
+
+        public static int changeState(int neighbors)
+        {
+            if(neighbors < 2 || neighbors > 3)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
     }
 }

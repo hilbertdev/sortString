@@ -39,11 +39,24 @@ namespace gameOfLife.Tests
         public void gameOfLife_countLiveNeighbors()
         {
             int[,] vs = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
-            int liveNeighborsCount = gameOfLife.Library.gameOfLife.countNeighbors(vs, 2, 2);
+            int liveNeighborsCount = gameOfLife.Library.gameOfLife.countNeighbors(vs, 2, 1);
 
-            Assert.AreEqual(8, liveNeighborsCount);
-           
-            
+            Assert.AreEqual(5, liveNeighborsCount);
+        }
+        [Test]
+        public void gameOfLife_changeState()
+        {
+            int [,] board = { { 0, 1, 0 }, { 0, 1, 1 }, { 0, 0, 0 } };
+            int col = 1;
+            int row = 1;
+            int totalNeighbors = gameOfLife.Library.gameOfLife.countNeighbors(board, col, row);
+            int newState = gameOfLife.Library.gameOfLife.changeState(totalNeighbors);
+
+            Assert.AreEqual(1, newState);
+        }
+        [Test]
+        public void gameOfLife_createNextGeneration()
+        {
 
         }
  

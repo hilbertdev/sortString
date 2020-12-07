@@ -12,8 +12,8 @@ namespace gameOfLife
         {
             int[,] board = createBoard(0, 0);
             int [,] popBoard = populateBoard(board);
-            int[,] vs = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
-            int liveNeighborsCount = countNeighbors(vs, 2, 2);
+            int[,] vs = { { 0, 1, 1 }, { 1, 1, 1 }, { 0, 1, 1 } };
+            int liveNeighborsCount = countNeighbors(vs, 1, 1);
             Console.WriteLine(liveNeighborsCount);
             Console.ReadLine();
         }
@@ -47,9 +47,9 @@ namespace gameOfLife
         public static int countNeighbors(int[,] grid, int col, int row)
         {
             int total = 0;
-            for (int i = col - 1; i < 2; i++)
+            for (int i = col - 1; i < 3; i++)
             {
-                for (int ix = row - 1; row < 2; ix++)
+                for (int ix = row - 1; ix < 3; ix++)
                 {
                     total += grid[i, ix];
                 }
