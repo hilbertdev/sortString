@@ -124,15 +124,30 @@ namespace gameOfLife.Library
 
         }
 
+        public static int[,] createNextGen(int[,] board)
+        {
+            int[,] copy = board;
+            for (int i = 0; i < board.GetLength(0) - 1; i++)
+            {
+                for (int ix = 0; ix < board.GetLength(1) - 1; ix++)
+                {
+                    copy[i, ix] = changeState(countNeighbors(board, i, ix));
+
+                }
+            }
+            return copy;
+
+        }
+
         public static int changeState(int neighbors)
         {
-            if(neighbors < 2 || neighbors > 3)
-            {
-                return 0;
-            }
-            else
+        if(neighbors ==2 || neighbors == 3)
             {
                 return 1;
+            }
+        else
+            {
+                return 0;
             }
         }
     }

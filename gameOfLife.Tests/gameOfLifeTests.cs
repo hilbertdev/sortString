@@ -57,7 +57,13 @@ namespace gameOfLife.Tests
         [Test]
         public void gameOfLife_createNextGeneration()
         {
+            int[,] vs = { { 1, 0, 1 }, { 1, 1, 0 }, { 0, 1, 0 } };
+          //  int[,] board = gameOfLife.Library.gameOfLife.createBoard(5, 5);
+            int[,] newBoard = gameOfLife.Library.gameOfLife.createNextGen(vs);
+            int [,] expected =  { {1,0,0 }, {1,0,1 }, {1,1,1 } };
+            CollectionAssert.AreEqual(expected, newBoard);
 
+            
         }
  
 
