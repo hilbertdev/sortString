@@ -10,13 +10,23 @@ namespace gameOfLife
     {
         static void Main(string[] args)
         {
-            int[,] board = createBoard(5, 5);
+            Console.WriteLine("Please enter number of rows");
+            int row = Convert.ToInt32( Console.ReadLine());
+            Console.WriteLine("Please enter number of cols");
+            int col = Convert.ToInt32( Console.ReadLine());
+            Console.WriteLine("Please enter number of generations");
+            int generations = Convert.ToInt32(Console.ReadLine());
+            int[,] board = createBoard(row, col);
             int [,] popBoard = populateBoard(board);
-            Print2DGen(popBoard);
-            int[,] newBoard = createNextGen(popBoard);
             Console.WriteLine("First Generation");
-            Console.WriteLine("Next Generation");
-            Print2DGen(newBoard);
+            Print2DGen(popBoard);
+            for(int i = 2; i < generations + 1; i++){
+                string gen = string.Format("This is generation number {0}", i);
+                Console.WriteLine(gen);
+                int[,] newBoard = createNextGen(popBoard);
+                Print2DGen(newBoard);
+                popBoard = newBoard;
+            }
             Console.ReadLine();
             
         }
@@ -91,9 +101,11 @@ namespace gameOfLife
                 if (col - 1 < 0)
                 {
                     int totalN = 0;
+                    int startPos = row - 1;
+                    int endPos = row +1;
                     for (int i = col; i < 2; i++)
                     {
-                        for (int ix = row - 1; ix < row + 1; ix++)
+                        for (int ix = startPos; ix < endPos; ix++)
                         {
                             totalN += grid[ix, i];
                         }
@@ -104,7 +116,9 @@ namespace gameOfLife
                 else if (row - 1 < 0)
                 {
                     int totalN = 0;
-                    for (int i = col - 1; i < col + 1; i++)
+                    int startPos = col - 1;
+                    int endPos = col + 1;
+                    for (int i = startPos; i < endPos; i++)
                     {
                         for (int ix = row; ix < 2; ix++)
                         {
@@ -117,7 +131,9 @@ namespace gameOfLife
                 else
                 {
                     int total = 0;
-                    for (int i = col - 1; i < col +  1; i++)
+                    int startPos = col - 1;
+                    int endPos = col + 1;
+                    for (int i = startPos; i < endPos; i++)
                     {
                         for (int ix = row - 1; ix < row + 1; ix++)
                         {
